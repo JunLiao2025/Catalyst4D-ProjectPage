@@ -2,6 +2,9 @@
 
 This is the project page for "Catalyst4D: High-Fidelity 3D-to-4D Scene Editing via Dynamic Propagation".
 
+## 🔗 Live Demo
+**👉 [Click here to view the Project Page](https://JunLiao2025.github.io/Catalyst4D-ProjectPage/)**
+
 ## Local Preview
 
 You can preview the website locally by opening `index.html` in your browser, or running a local server:
@@ -43,4 +46,4 @@ This project is ready to be deployed as a static website. The easiest way is usi
     *   Click **Save**.
 
 4.  **Visit your site**:
-    *   After a minute or two, your site will be live at `https://YOUR_USERNAME.github.io/Catalyst4D-Page/`.
+    *   After a minute or two, your site will be live at `https://JunLiao2025.github.io/Catalyst4D-ProjectPage/`.
