@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Seamless 3D-to-4D Scene Editing via Dynamic Propagation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalyst4D: High-Fidelity 3D-to-4D Scene Editing via Dynamic Propagation</title>
+
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet"> -->
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="./static/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="./static/js/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="file:///e%3A/4DGS_editing/nerfies.github.io/demo.html">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Catalyst4D: High-Fidelity 3D-to-4D Scene Editing via Dynamic Propagation</h1>
+          <div class="column has-text-centered">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advances in 3D scene editing using NeRF and 3DGS enable high-quality static scene editing. 
+            In contrast, dynamic scene editing remains challenging, as methods that directly extend 2D diffusion 
+            models to 4D often produce motion artifacts, temporal flickering, and inconsistent style propagation.
+            We introduce <strong>Catalyst4D</strong>, a framework that transfers high-quality 3D edits to dynamic 4D 
+            Gaussian scenes while maintaining spatial and temporal coherence.  
+            At its core, <strong>Anchor-based Motion Guidance (AMG)</strong> builds a set of structurally stable and spatially 
+            representative anchors from both original and edited Gaussians. These anchors serve as robust region-level 
+            references, and their correspondences are established via optimal transport to enable consistent deformation 
+            propagation without cross-region interference or motion drift.  
+            Complementarily, <strong>Color Uncertainty-guided Appearance Refinement (CUAR)</strong> preserves temporal appearance 
+            consistency by estimating per-Gaussian color uncertainty and selectively refining regions prone to 
+            occlusion-induced artifacts.  
+            Extensive experiments demonstrate that Catalyst4D achieves temporally stable, high-fidelity dynamic scene editing 
+            and outperforms existing methods in both visual quality and motion coherence.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Method</h2>
+          <div class="container is-max-desktop">
+            <img src="./static/images/pipeline.png"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+          </div>
+        <div class="content has-text-justified">
+          <p>
+            Overview of Catalyst4D. Given the first-frame edited dynamic Gaussians, our 
+            (a) <strong>Anchor-based Motion Guidance</strong> establishes region-level correspondences 
+            with the original Gaussians via anchor construction and optimal transport, enabling 
+            reliable deformation transfer. Then, (b) <strong>Color Uncertainty-guided Appearance Refinement</strong> 
+            leverages first-frame warping and Gaussian color consistency to identify and correct motion-induced artifacts across time.
+          </p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Results</h2>
+      </div>
+    </div>
+    
+    <!-- Qualitative Comparison. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Qualitative Comparison</h2>
+
+        <!--/ Results of Qualitative Comparison and Style Transfer -->
+        <div class="container is-max-desktop mb-6">
+          <h3 class="title is-4">
+            Sear_steak
+            <span class="has-text-weight-normal has-text-grey">   : Turn him into a Minecraft character</span>
+          </h3>
+          
+          <div class="columns is-centered is-multiline">
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Ours</h2>
+                <div id="ours-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/ours_src_Sear_steak.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/ours_edit_Sear_steak.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4D-to-4D</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/i4d_src_Sear_steak.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/i4d_edit_Sear_steak.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4DGS</h2>
+                <div id="Instruct4DGS-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/ctrld_src_Sear_steak.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/i4dgs_edit_Sear_steak.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">CTRL-D</h2>
+                <div id="CTRL-D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/ctrld_src_Sear_steak.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/ctrld_edit_Sear_steak.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="container is-max-desktop mb-6">
+          <h3 class="title is-4">
+            Coffee_martini
+            <span class="has-text-weight-normal has-text-grey">  : Turn his hat into a newsboy cap</span>
+          </h3>
+          <div class="columns is-centered is-multiline">
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Ours</h2>
+                <div id="ours-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ours_src_Coffee_martini.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ours_edit_Coffee_martini.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4D-to-4D</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4d_src_Coffee_martini.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4d_edit_Coffee_martini.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4DGS</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_src_Coffee_martini.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4dgs_edit_Coffee_martini.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">CTRL-D</h2>
+                <div id="CTRL-D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_src_Coffee_martini.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_edit_Coffee_martini.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!--/ Results of Qualitative Comparison and Style Transfer -->
+        <div class="container is-max-desktop mb-6">
+          <!-- <h3 class="title is-4">Cut_roasted_beef</h3> -->
+          <h3 class="title is-4">
+            Cut_roasted_beef
+            <span class="has-text-weight-normal has-text-grey">   : Turn his clothes into a football player outfit</span>
+          </h3>
+          <div class="columns is-centered is-multiline">
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Ours</h2>
+                <div id="ours-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ours_src_Cut_roasted_beef.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ours_edit_Cut_roasted_beef.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4D-to-4D</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4d_src_Cut_roasted_beef.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4d_edit_Cut_roasted_beef.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4DGS</h2>
+                <div id="Instruct4DGS-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/ctrld_src_Cut_roasted_beef.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/i4dgs_edit_Cut_roasted_beef.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">CTRL-D</h2>
+                <div id="CTRL-D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_src_Cut_roasted_beef.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_edit_Cut_roasted_beef.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!--/ Results of Qualitative Comparison and Style Transfer -->
+        <div class="container is-max-desktop mb-6">
+          <!-- <h3 class="title is-4">Trimming</h3> -->
+          <h3 class="title is-4">
+            Trimming
+            <span class="has-text-weight-normal has-text-grey">   : Change the leaves of the plants to autumn leaves</span>
+          </h3>
+          <div class="columns is-centered is-multiline">
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Ours</h2>
+                <div id="ours-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ours_src_Trimming.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ours_edit_Trimming.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4D-to-4D</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4d_src_Trimming.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4d_edit_Trimming.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4DGS</h2>
+                <div id="Instruct4DGS-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/ctrld_src_Trimming.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/i4dgs_edit_Trimming.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">CTRL-D</h2>
+                <div id="CTRL-D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_src_Trimming.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_edit_Trimming.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!--/ Results of Qualitative Comparison and Style Transfer -->
+        <div class="container is-max-desktop mb-6">
+          <!-- <h3 class="title is-4">Discussion</h3> -->
+          <h3 class="title is-4">
+            Discussion
+            <span class="has-text-weight-normal has-text-grey">   : Make the people look like Marble roman sculptures</span>
+          </h3>
+          <div class="columns is-centered is-multiline">
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Ours</h2>
+                <div id="ours-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ours_src_Discussion.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ours_edit_Discussion.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4D-to-4D</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4d_src_Discussion.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/i4d_edit_Discussion.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Instruct4DGS</h2>
+                <div id="Instruct4DGS-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/ctrld_src_Discussion.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/i4dgs_edit_Discussion.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">CTRL-D</h2>
+                <div id="CTRL-D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_src_Discussion.mp4" type="video/mp4"></video></div>
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/ctrld_edit_Discussion.mp4" type="video/mp4"></video></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <h2 class="title is-3">Global Style Transfer</h2>
+        
+        <!--/ Results of Qualitative Comparison and Style Transfer -->
+        <div class="container is-max-desktop mb-6">
+          <!-- <h3 class="title is-4">Coffee</h3> -->
+          <h3 class="title is-4">
+            Coffee_martini
+            <span class="has-text-weight-normal has-text-grey">      </span>
+          </h3>
+          <div class="columns">
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Src</h2>
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/style_transfer_coffee_src.mp4" type="video/mp4"></video></div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Sea_coffee</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/style_transfer_sea_coffee_edit.mp4" type="video/mp4"></video></div>
+                  <div class="item"><img src="./static/videos/style_transfer_sea_style.png" alt="sea_coffee" style="max-width:100%; height:auto;" /></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Cartoon_coffee</h2>
+                <div id="Instruct4DGS-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline width="100%"><source src="./static/videos/style_transfer_cartoon_coffee_edit.mp4" type="video/mp4"></video></div>
+                  <div class="item"><img src="./static/videos/style_transfer_cartoon1_style.png" alt="autumn_coffee" style="max-width:100%; height:auto;" /></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Autumn_coffee</h2>
+                <div id="CTRL-D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/style_transfer_autumn_coffee_edit.mp4" type="video/mp4"></video></div>
+                  <div class="item"><img src="./static/videos/style_transfer_autumn_style.png" alt="autumn_coffee" style="max-width:100%; height:auto;" /></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        <!--/ Results of Qualitative Comparison and Style Transfer -->
+        <div class="container is-max-desktop mb-6">
+          <!-- <h3 class="title is-4">Sear_steak</h3> -->
+          <h3 class="title is-4">
+            Sear_steak
+            <span class="has-text-weight-normal has-text-grey">     </span>
+          </h3>
+          <div class="columns">
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Src</h2>
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/style_transfer_sear_src.mp4" type="video/mp4"></video></div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Cat_sear</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/style_transfer_cat_sear_edit.mp4" type="video/mp4"></video></div>
+                  <div class="item"><img src="./static/videos/style_transfer_cat_style.png" alt="style_transfer_flower" style="max-width:100%; height:auto;" /></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Dog_sear</h2>
+                <div id="Instruct4D-to-4D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/style_transfer_dog_sear_edit.mp4" type="video/mp4"></video></div>
+                  <div class="item"><img src="./static/videos/style_transfer_dog_style.png" alt="style_transfer_flower" style="max-width:100%; height:auto;" /></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="column is-one-quarter">
+              <div class="content has-text-centered">
+                <h2 class="title is-5">Cartoon_sear</h2>
+                <div id="CTRL-D-carousel" class="carousel results-carousel">
+                  <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/style_transfer_cartoon_sear_edit.mp4" type="video/mp4"></video></div>
+                  <div class="item"><img src="./static/videos/style_transfer_cartoon_style.png" alt="style_transfer_cartoon" style="max-width:100%; height:auto;" /></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <h2 class="title is-3">Qualitative Results with Varying Camera Poses</h2>
+        
+        <!--/ Results of Qualitative Comparison and Style Transfer -->
+        <div class="container is-max-desktop mb-6">
+          <!-- <h3 class="title is-4">Sear_steak</h3> -->
+          <h3 class="title is-4">
+            Sear_steak
+            <span class="has-text-weight-normal has-text-grey">     </span>
+          </h3>
+          <div class="columns">
+
+            <div class="column is-one-third">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/spiral_video_sear_steak_minecraft_src.mp4" type="video/mp4"></video></div>
+                <p>Original Scene</p>
+              </div>
+            </div>
+
+            <div class="column is-one-third">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/spiral_video_sear_steak_minecraft_edit.mp4" type="video/mp4"></video></div>
+                <p>Turn him into a Minecraft character</p>
+              </div>
+            </div>
+            
+            <div class="column is-one-third">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/spiral_video_sear_steak_armor_edit.mp4" type="video/mp4"></video></div>
+                <p>Make him wear shoulder armor</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!--/ Results of Qualitative Comparison and Style Transfer -->
+        <div class="container is-max-desktop mb-6">
+          <!-- <h3 class="title is-4">Sear_steak</h3> -->
+          <h3 class="title is-4">
+            HyperNeRF
+            <span class="has-text-weight-normal has-text-grey">     </span>
+          </h3>
+          <div class="columns">
+
+            <div class="column is-one-sixth">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/torch_src.mp4" type="video/mp4"></video></div>
+                <p>Original Scene</p>
+              </div>
+            </div>
+
+
+            <div class="column is-one-sixth">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/torch_emerald.mp4" type="video/mp4"></video></div>
+                <p>Make the torch carved from a flawless emerald</p>
+              </div>
+            </div>
+            
+            <div class="column is-one-sixth">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/torch_pop.mp4" type="video/mp4"></video></div>
+                <p>Turn the torch into Pop art style</p>
+              </div>
+            </div>
+
+
+            <div class="column is-one-sixth">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/3dprinter_src.mp4" type="video/mp4"></video></div>
+                <p>Original Scene</p>
+              </div>
+            </div>
+
+
+            <div class="column is-one-sixth">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/3dprinter_coral.mp4" type="video/mp4"></video></div>
+                <p>Turn the extruder into coral style</p>
+              </div>
+            </div>
+            
+            <div class="column is-one-sixth">
+              <div class="content has-text-centered">
+                <div class="item"><video autoplay controls muted loop playsinline height="100%"><source src="./static/videos/3dprinter_ice.mp4" type="video/mp4"></video></div>
+                <p>Make the extruder covered in glacial ice</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
